@@ -48,16 +48,16 @@ dependencies {
     implementation(project(":TapMindSdk"))
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-
-                groupId = "com.github.TapMind"
-                artifactId = "CustomAdapter-admob"
-                version = "1.0.3"
-            }
-        }
-    }
-}
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            create<MavenPublication>("release") {
+//                from(components["release"])
+//
+//                groupId = "com.github.TapMind"
+//                artifactId = "CustomAdapter-admob"
+//                version = "1.0.3"
+//            }
+//        }
+//    }
+//}
