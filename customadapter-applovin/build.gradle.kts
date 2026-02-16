@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ironsource.adapters.custom.istapmindcustomadapter-applovin"
+    namespace = "com.ironsource.adapters.custom.tapmind_applovin"
     compileSdk = 36
     defaultConfig {
         minSdk = 23

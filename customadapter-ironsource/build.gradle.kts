@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ironsource.adapters.custom.istapmindcustomadapter-ironsource"
+    namespace = "com.ironsource.adapters.custom.tapmind_ironsource"
     compileSdk = 36
 
     defaultConfig {
