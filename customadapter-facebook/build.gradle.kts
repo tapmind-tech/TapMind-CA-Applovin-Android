@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ironsource.adapters.custom.istapmindcustomadapter-facebook"
+    namespace = "com.ironsource.adapters.custom.tapmind_facebook"
     compileSdk = 36
 
     defaultConfig {
