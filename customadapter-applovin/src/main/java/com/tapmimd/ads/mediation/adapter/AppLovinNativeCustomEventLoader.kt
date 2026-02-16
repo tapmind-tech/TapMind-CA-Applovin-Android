@@ -88,7 +88,7 @@ class AppLovinNativeCustomEventLoader private constructor(
                 return false
             }
         }
-        TapMindsMediationAdapter.getInstance(activity!!).loadNativeAd(request,activity!!, object : TapMindNativeAdAdapterListener{
+        TapMindsMediationAdapter.getInstance().loadNativeAd(request,activity!!, 0,object : TapMindNativeAdAdapterListener{
 
             override fun onNativeAdLoaded(tapMindNativeAd: TapMindNativeAd?, bundle: Bundle?) {
                 Log.d(TAG,"$TAG1 : onNativeAdLoaded")

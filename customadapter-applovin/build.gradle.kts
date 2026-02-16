@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.tapmimd.ads.mediation.adapter"
+    namespace = "com.ironsource.adapters.custom.istapmindcustomadapter"
     compileSdk = 36
     defaultConfig {
         minSdk = 23
@@ -50,16 +50,16 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-
-                groupId = "com.github.TapMind"
-                artifactId = "CustomAdapter-appLovin"
-                version = "1.0.0"
-            }
-        }
-    }
-}
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            create<MavenPublication>("release") {
+//                from(components["release"])
+//
+//                groupId = "com.github.TapMind"
+//                artifactId = "CustomAdapter-appLovin"
+//                version = "1.0.0"
+//            }
+//        }
+//    }
+//}
