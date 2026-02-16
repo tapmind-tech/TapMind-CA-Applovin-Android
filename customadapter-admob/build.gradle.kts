@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ironsource.adapters.custom.istapmindcustomadapter-applovin"
+    namespace = "com.ironsource.adapters.custom.istapmindcustomadapter"
     compileSdk = 36
     defaultConfig {
         minSdk = 23
@@ -38,28 +38,26 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    compileOnly("com.applovin:applovin-sdk:13.5.0")
+    compileOnly("com.google.android.gms:play-services-ads:23.6.0")
     implementation(project(":TapMindSdk"))
-    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-
-                groupId = "com.github.TapMind"
-                artifactId = "CustomAdapter-appLovin"
-                version = "1.0.0"
-            }
-        }
-    }
-}
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            create<MavenPublication>("release") {
+//                from(components["release"])
+//
+//                groupId = "com.github.TapMind"
+//                artifactId = "CustomAdapter-admob"
+//                version = "1.0.3"
+//            }
+//        }
+//    }
+//}
