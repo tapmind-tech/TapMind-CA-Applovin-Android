@@ -86,8 +86,9 @@ dependencies {
 //    implementation("com.google.android.gms:play-services-appset:16.0.0")
 //    implementation("com.google.android.gms:play-services-ads-identifier:18.1.0")
 
-//    implementation(project(":customadapter-admob"))
-    implementation("com.github.tapmind-tech.TapMind-Custom-Adapter-Android:CustomAdapter-admob:1.0.1-alpha01")
+    implementation(project(":customadapter-admob"))
+    implementation(project(":customadapter-applovin"))
+//    implementation("com.github.tapmind-tech.TapMind-Custom-Adapter-Android:CustomAdapter-admob:1.0.1-alpha01")
 //    implementation("com.github.tapmind-tech.TapMind-Custom-Adapter-Android:CustomAdapter-admob:1.0.9")
 //    implementation("io.github.ravirising26:customadapter-admob:1.0.8")
 }
