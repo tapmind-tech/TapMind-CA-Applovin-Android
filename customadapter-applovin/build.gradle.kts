@@ -1,13 +1,13 @@
 import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
 
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.android.library")
+    id("org.jetbrains.kotlin.android")
     id("maven-publish")
 }
 
 android {
-    namespace = "com.tapmimd.ads.mediation.adapter"
+    namespace = "com.ironsource.adapters.custom.tapmind_applovin"
     compileSdk = 36
     defaultConfig {
         minSdk = 23
@@ -38,12 +38,13 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("com.google.android.material:material:1.13.0")
+
+    testImplementation("junit:junit:4.13.2")
+
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
 
     compileOnly("com.applovin:applovin-sdk:13.5.0")
     implementation(project(":TapMindSdk"))

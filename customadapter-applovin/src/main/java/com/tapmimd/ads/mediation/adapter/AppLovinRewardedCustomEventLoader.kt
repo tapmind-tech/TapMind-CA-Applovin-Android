@@ -178,13 +178,13 @@ class AppLovinRewardedCustomEventLoader private constructor(
 
         }
 
-        TapMindsMediationAdapter.getInstance(activity!!)
-            .loadRewardedAd(request!!,activity!!, tapMindRewardedAdapterListener!!)
+        TapMindsMediationAdapter.getInstance()
+            .loadRewardedAd(request!!,activity!!, 0,tapMindRewardedAdapterListener!!)
 
     }
 
     fun showAd(context: Context) {
-        TapMindsMediationAdapter.getInstance(context)
+        TapMindsMediationAdapter.getInstance()
             .showRewardedAd(request!!,context as Activity,tapMindRewardedAdapterListener!!)
     }
 

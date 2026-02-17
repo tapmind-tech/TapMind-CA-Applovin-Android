@@ -1,0 +1,7 @@
+<resources>
+<!--    <string name="app_name">TapMindAndroid</string>-->
+<!--    <string name="app_name">Edamame</string>-->
+<!--    <string name="app_name">Impression Test</string>-->
+    <string name="app_name">UAT Android Admob</string>
+    <string name="ad_attribution" translatable="false">Ad</string>
+</resources>
