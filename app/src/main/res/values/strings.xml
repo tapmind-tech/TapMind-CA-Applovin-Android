@@ -1,0 +1,7 @@
+<resources>
+<!--    <string name="app_name">TapMindAndroid</string>-->
+<!--    <string name="app_name">Edamame</string>-->
+<!--    <string name="app_name">Asmita Personal</string>-->
+    <string name="app_name">Prod Android Ironsource</string>
+    <string name="ad_attribution" translatable="false">Ad</string>
+</resources>

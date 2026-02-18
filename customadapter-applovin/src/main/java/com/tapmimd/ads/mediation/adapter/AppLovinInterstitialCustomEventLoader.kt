@@ -151,13 +151,13 @@ class AppLovinInterstitialCustomEventLoader private constructor(
         }
 
 
-        TapMindsMediationAdapter.getInstance(activity!!)
-            .loadInterstitialAd(request!!,activity!!, tapMindInterstitialAdapterListener!!)
+        TapMindsMediationAdapter.getInstance()
+            .loadInterstitialAd(request!!,activity!!,tapMindInterstitialAdapterListener!!)
     }
 
     fun showAd(context: Context) {
         Log.d(TAG, "$TAG1 : showAd")
-        TapMindsMediationAdapter.getInstance(context)
+        TapMindsMediationAdapter.getInstance()
             .showInterstitialAd(request!!,context as Activity,tapMindInterstitialAdapterListener!!)
     }
 }

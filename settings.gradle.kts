@@ -17,9 +17,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
-        maven {
-            url = uri("https://maven.pkg.github.com/ravirising26/CustomeAdapter-admob")
-        }
+//        maven {
+//            url = uri("https://maven.pkg.github.com/ravirising26/CustomeAdapter-admob")
+//        }
     }
 }
 
