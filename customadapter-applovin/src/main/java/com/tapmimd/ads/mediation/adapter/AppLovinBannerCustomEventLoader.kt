@@ -2,41 +2,51 @@ package com.tapmimd.ads.mediation.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.annotation.RequiresApi
 import com.applovin.mediation.MaxAdFormat
 import com.applovin.mediation.adapter.MaxAdapterError
 import com.applovin.mediation.adapter.listeners.MaxAdViewAdapterListener
 import com.applovin.mediation.adapter.parameters.MaxAdapterResponseParameters
+import com.tapmimd.ads.mediation.adapter.GeoProviderAppLovin.getAppInfo
 import com.tapminds.adapter.TapMindsMediationAdapter
 import com.tapminds.adapter.listener.TapMindAdapterError
 import com.tapminds.adapter.listener.TapMindAdapterResponseParameters
 import com.tapminds.ads.banner.TapMindAdViewAdapterListener
+import com.tapminds.network.AdRequestPayload
+import com.tapminds.network.AdRequestPayloadHolder
 import com.tapminds.tapmindsads.TapMindAdFormat
+import java.util.Locale
 
 class AppLovinBannerCustomEventLoader private constructor(
     val maxAdapterResponseParameters: MaxAdapterResponseParameters,
     val maxAdFormat: MaxAdFormat,
     val activity: Activity,
     val maxAdViewAdapterListener: MaxAdViewAdapterListener
-){
-
+) {
 
     private val TAG = "APP@@@"
     private val TAG1 = "AppLovinBannerCustomEventLoader"
-    companion object{
+
+    companion object {
 
         @SuppressLint("StaticFieldLeak")
         @Volatile
         private var INSTANCE: AppLovinBannerCustomEventLoader? = null
 
-        fun getInstance(maxAdapterResponseParameters: MaxAdapterResponseParameters,
-                        maxAdFormat: MaxAdFormat,
-                        activity: Activity,
-                        maxAdViewAdapterListener: MaxAdViewAdapterListener): AppLovinBannerCustomEventLoader {
+        fun getInstance(
+            maxAdapterResponseParameters: MaxAdapterResponseParameters,
+            maxAdFormat: MaxAdFormat,
+            activity: Activity,
+            maxAdViewAdapterListener: MaxAdViewAdapterListener
+        ): AppLovinBannerCustomEventLoader {
             return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: AppLovinBannerCustomEventLoader(maxAdapterResponseParameters,maxAdFormat,activity,maxAdViewAdapterListener).also {
+                INSTANCE ?: AppLovinBannerCustomEventLoader(
+                    maxAdapterResponseParameters, maxAdFormat, activity, maxAdViewAdapterListener
+                ).also {
                     INSTANCE = it
                 }
             }
@@ -44,108 +54,117 @@ class AppLovinBannerCustomEventLoader private constructor(
 
     }
 
-    fun loadAdd(){
-        val request = object : TapMindAdapterResponseParameters {
-
-            override fun getThirdPartyAdPlacementId(): String {
-                return ""
+    fun loadAdd() {
+        activity.runOnUiThread {
+            val request = object : TapMindAdapterResponseParameters {
+                override fun getThirdPartyAdPlacementId() = ""
+                override fun getBidResponse() = ""
+                override fun getAdUnitId() = ""
+                override fun getLocalExtraParameters() = emptyMap<String, Any>()
+                override fun getServerParameters() = Bundle()
+                override fun getCustomParameters() = Bundle()
+                override fun hasUserConsent() = true
+                override fun isAgeRestrictedUser() = false
+                override fun isDoNotSell() = false
+                override fun getConsentString() = ""
+                override fun isTesting() = false
             }
 
-            override fun getBidResponse(): String {
-                return  ""
-            }
+            val customParams = maxAdapterResponseParameters.customParameters
+            val serverParams = maxAdapterResponseParameters.serverParameters
+            Log.e(TAG, "customParams: $customParams")
+            Log.e(TAG, "serverParams: $serverParams")
+            val placementName = customParams.getString("placement_id") ?: "tapminds_banner"
 
-            override fun getAdUnitId(): String {
-                return ""
-            }
+            val appData = getAppInfo(activity)
+            val country = Locale.getDefault().country
+            val geo = GeoProviderAppLovin.get(country)
 
-            override fun getLocalExtraParameters(): Map<String, Any> {
-                return emptyMap()
-            }
+            AdRequestPayloadHolder.playLoad = AdRequestPayload(
+                appName = appData.appName,
+                placementId = placementName,
+                appVersion = appData.versionName,
+                adType = "Banner",
+                country = country,
+                packageName = appData.packageName,
+                "AppLovinBannerCustomEventLoader",
+            )
 
-            override fun getServerParameters(): Bundle {
-                return Bundle()
-            }
-
-            override fun getCustomParameters(): Bundle {
-                // If you need custom params, pass using adConfig.mediationExtrasBundle (optional)
-                return Bundle()
-            }
-
-            override fun hasUserConsent(): Boolean? {
-                return true
-            }
-
-            override fun isAgeRestrictedUser(): Boolean? {
-                return false
-            }
-
-            override fun isDoNotSell(): Boolean? {
-                return false
-            }
-
-            override fun getConsentString(): String? {
-                return ""
-            }
-
-            override fun isTesting(): Boolean {
-                return false
-            }
-        }
-        
-        TapMindsMediationAdapter.getInstance(activity)
-            .loadAdViewAd(request, TapMindAdFormat.formatFromString(maxAdFormat.label)!!, activity,
+            TapMindsMediationAdapter.getInstance().loadAdViewAd(
+                request,
+                TapMindAdFormat.formatFromString(maxAdFormat.label)!!,
+                activity,
                 object : TapMindAdViewAdapterListener {
                     override fun onAdViewAdLoaded(view: View) {
                         maxAdViewAdapterListener.onAdViewAdLoaded(view)
-                        Log.d(TAG,"$TAG1 : onAdLoaded")
+                        Log.d(TAG, "$TAG1 : onAdLoaded")
                     }
 
                     override fun onAdViewAdLoaded(view: View, bundle: Bundle?) {
-                        maxAdViewAdapterListener.onAdViewAdLoaded(view,bundle)
+                        maxAdViewAdapterListener.onAdViewAdLoaded(view, bundle)
                     }
 
                     override fun onAdViewAdLoadFailed(error: TapMindAdapterError) {
-                        Log.d(TAG,"$TAG1 : onAdFailedToLoad "+error.getErrorCode()+ " "+error.getErrorMessage())
-                        maxAdViewAdapterListener.onAdViewAdLoadFailed(MaxAdapterError(error.getErrorCode(), error.getMessage()))
+                        Log.d(
+                            TAG,
+                            "$TAG1 : onAdFailedToLoad " + error.getErrorCode() + " " + error.getErrorMessage()
+                        )
+                        maxAdViewAdapterListener.onAdViewAdLoadFailed(
+                            MaxAdapterError(
+                                error.getErrorCode(), error.getMessage()
+                            )
+                        )
                     }
 
                     override fun onAdViewAdDisplayed() {
-                        Log.d(TAG,"$TAG1 : onAdOpened")
+                        Log.d(TAG, "$TAG1 : onAdOpened")
                         maxAdViewAdapterListener.onAdViewAdDisplayed()
                     }
 
                     override fun onAdViewAdDisplayed(bundle: Bundle?) {
-                        Log.d(TAG,"$TAG1 : onAdOpened Bundle")
+                        Log.d(TAG, "$TAG1 : onAdOpened Bundle")
                         maxAdViewAdapterListener.onAdViewAdDisplayed(bundle)
                     }
 
                     override fun onAdViewAdDisplayFailed(error: TapMindAdapterError) {
-                        Log.d(TAG,"$TAG1 : onAdViewAdDisplayFailed "+error.getErrorCode()+ " "+error.getErrorMessage())
-                        maxAdViewAdapterListener.onAdViewAdDisplayFailed(MaxAdapterError(error.getErrorCode(), error.getMessage()))
+                        Log.d(
+                            TAG,
+                            "$TAG1 : onAdViewAdDisplayFailed " + error.getErrorCode() + " " + error.getErrorMessage()
+                        )
+                        maxAdViewAdapterListener.onAdViewAdDisplayFailed(
+                            MaxAdapterError(
+                                error.getErrorCode(), error.getMessage()
+                            )
+                        )
                     }
 
-                    override fun onAdViewAdDisplayFailed(error: TapMindAdapterError, bundle: Bundle?) {
-                        maxAdViewAdapterListener.onAdViewAdDisplayFailed(MaxAdapterError(error.getErrorCode(), error.getMessage()),bundle)
+                    override fun onAdViewAdDisplayFailed(
+                        error: TapMindAdapterError, bundle: Bundle?
+                    ) {
+                        maxAdViewAdapterListener.onAdViewAdDisplayFailed(
+                            MaxAdapterError(
+                                error.getErrorCode(), error.getMessage()
+                            ), bundle
+                        )
                     }
 
                     override fun onAdViewAdClicked() {
-                        Log.d(TAG,"$TAG1 : onAdClicked")
+                        Log.d(TAG, "$TAG1 : onAdClicked")
                         maxAdViewAdapterListener.onAdViewAdClicked()
                     }
 
                     override fun onAdViewAdClicked(bundle: Bundle?) {
-                        Log.d(TAG,"$TAG1 : onAdClicked onAdViewAdClicked")
+                        Log.d(TAG, "$TAG1 : onAdClicked onAdViewAdClicked")
                         maxAdViewAdapterListener.onAdViewAdClicked(bundle)
                     }
 
                     override fun onAdViewAdHidden() {
-                        Log.d(TAG,"$TAG1 : onAdClosed")
+                        Log.d(TAG, "$TAG1 : onAdClosed")
                         maxAdViewAdapterListener.onAdViewAdHidden()
                     }
 
                     override fun onAdViewAdHidden(bundle: Bundle?) {
-                        Log.d(TAG,"$TAG1 : onAdClosed Bundle")
+                        Log.d(TAG, "$TAG1 : onAdClosed Bundle")
                         maxAdViewAdapterListener.onAdViewAdHidden(bundle)
                     }
 
@@ -165,7 +184,6 @@ class AppLovinBannerCustomEventLoader private constructor(
                         maxAdViewAdapterListener.onAdViewAdCollapsed(bundle)
                     }
                 })
+        }
     }
-    
-
 }
