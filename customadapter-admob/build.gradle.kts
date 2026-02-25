@@ -57,19 +57,19 @@ dependencies {
     api("io.github.ravirising26:tapmindsdk:1.0.12")
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-
-                groupId = "com.github.TapMind"
-                artifactId = "CustomAdapter-admob"
-                version = "1.0.3"
-            }
-        }
-    }
-}
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            create<MavenPublication>("release") {
+//                from(components["release"])
+//
+//                groupId = "com.github.TapMind"
+//                artifactId = "CustomAdapter-admob"
+//                version = "1.0.3"
+//            }
+//        }
+//    }
+//}
 
 //afterEvaluate {
 //    publishing {
