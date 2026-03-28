@@ -68,11 +68,11 @@ class AppLovinNativeCustomEventLoader private constructor(
                 return Bundle()
             }
 
-            override fun hasUserConsent(): Boolean? {
+            override fun hasUserConsent(): Boolean {
                 return true
             }
 
-            override fun isAgeRestrictedUser(): Boolean? {
+            override fun isAgeRestrictedUser(): Boolean {
                 return false
             }
 
@@ -88,13 +88,13 @@ class AppLovinNativeCustomEventLoader private constructor(
                 return false
             }
         }
-        TapMindsMediationAdapter.getInstance(activity!!).loadNativeAd(request,activity!!, object : TapMindNativeAdAdapterListener{
+        TapMindsMediationAdapter.getInstance().loadNativeAd(request,activity!!, 0,object : TapMindNativeAdAdapterListener{
 
-            override fun onNativeAdLoaded(tapMindNativeAd: TapMindNativeAd?, bundle: Bundle?) {
+            override fun onNativeAdLoaded(var1: TapMindNativeAd?, var2: Bundle?) {
                 Log.d(TAG,"$TAG1 : onNativeAdLoaded")
-                tapMindNativeAd?.let {
-                    val maxNativeAd = AppLovinUnifiedNativeAdMapper(tapMindNativeAd)
-                    maxAdViewAdapterListener?.onNativeAdLoaded(maxNativeAd.mapToMaxNativeAd(),bundle)
+                var1?.let {
+                    val maxNativeAd = AppLovinUnifiedNativeAdMapper(var1)
+                    maxAdViewAdapterListener?.onNativeAdLoaded(maxNativeAd.mapToMaxNativeAd(),var2)
                 }
             }
 

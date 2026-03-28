@@ -1,4 +1,4 @@
-package com.tapmimd.ads.mediation.adapter
+package com.ironsource.adapters.custom.istapmindcustomadapter
 
 import org.junit.Test
 

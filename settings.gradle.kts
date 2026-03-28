@@ -17,16 +17,16 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url = uri("https://jitpack.io") }
-        maven {
-            url = uri("https://maven.pkg.github.com/ravirising26/CustomeAdapter-admob")
-        }
+//        maven {
+//            url = uri("https://maven.pkg.github.com/ravirising26/CustomeAdapter-admob")
+//        }
     }
 }
 
 rootProject.name = "TapMind"
 include(":app")
-include(":TapMindSdk")
-include(":customadapter-facebook")
-include(":customadapter-admob")
+//include(":TapMindSdk")
+//include(":customadapter-facebook")
+//include(":customadapter-admob")
+//include(":customadapter-ironsource")
 include(":customadapter-applovin")
-include(":customadapter-ironsource")
