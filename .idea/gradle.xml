@@ -10,12 +10,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/TapMindSdk" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/customadapter-admob" />
             <option value="$PROJECT_DIR$/customadapter-applovin" />
-            <option value="$PROJECT_DIR$/customadapter-facebook" />
-            <option value="$PROJECT_DIR$/customadapter-ironsource" />
           </set>
         </option>
       </GradleProjectSettings>
