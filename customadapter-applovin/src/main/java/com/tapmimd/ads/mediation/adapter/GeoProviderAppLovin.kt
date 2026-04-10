@@ -250,7 +250,7 @@ object GeoProviderAppLovin {
         )
     }
 
-    const val sdkVersion = "1.0.14"
+    const val sdkVersion = "1.0.15"
 }
 
 data class AppInfoAppLovin(

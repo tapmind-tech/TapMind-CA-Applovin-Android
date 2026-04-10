@@ -48,25 +48,25 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
 
-    api("com.applovin:applovin-sdk:13.6.0")
+    api("com.applovin:applovin-sdk:13.6.2")
 //    api(project(":TapMindSdk"))
     api("io.github.tapmind-tech:tapmindsdk:1.0.27")
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
 }
 
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            create<MavenPublication>("release") {
-//                from(components["release"])
-//
-//                groupId = "com.github.TapMind"
-//                artifactId = "CustomAdapter-appLovin"
-//                version = "1.0.0"
-//            }
-//        }
-//    }
-//}
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+
+                groupId = "com.github.TapMind"
+                artifactId = "CustomAdapter-appLovin"
+                version = "1.0.0"
+            }
+        }
+    }
+}
 
 //afterEvaluate {
 //    publishing {
